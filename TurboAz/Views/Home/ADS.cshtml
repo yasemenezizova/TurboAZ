@@ -1,0 +1,358 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model TurboAz.ViewModels.CarViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link href="~/lib/bootstrap/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/twitter-bootstrap/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/twitter-bootstrap/css/bootstrap-reboot.css" rel="stylesheet" />
+</head>
+
+<body class="w-75; mx-auto; mb-4 " style="border-color: transparent">
+
+    @*<script src="~/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("body").on("change", "#marka", function () {
+            var selectBrandID = $(this).val();
+            $.getJSON("Home/GetMarkaForBrandID?id=" + selectBrandID, function (data) {
+                var selectedMarka = '';
+                $.each(data, function (i, marka) {
+                    selectedMarka += '<option value=\"' + marka.id + '\">' + marka.
+                })
+            })
+        })
+
+    </script>*@
+
+    <form action="Save" method="post" enctype="multipart/form-data">
+        @await Html.PartialAsync("_navbar")
+        <div style="background-color: #ca1016; border-color:transparent; border-right-style:hidden">
+            <div class="btn-group btn-block  px-lg-5 ">
+                <a href="#" class="btn  btn-sm font-weight-bold pt-3" style=" background-color: #ca1016;color:white;font-family:Helvetica, Arial, sans-serif; height: 50px;">Bütün elanlar</a>
+                <a href="#" class="btn  btn-sm font-weight-bold pt-3" style="background-color: #ca1016;color:white;font-family:Helvetica, Arial, sans-serif;  height: 50px;">Avtosalonlar</a>
+                <a href="#" class="btn  btn-sm font-weight-bold pt-3" style="background-color: #ca1016;color:white;font-family:Helvetica, Arial, sans-serif;  height: 50px;">Mağazalar və şirkətlər</a>
+                <a href="#" class="btn  btn-sm font-weight-bold pt-3" style="background-color: #ca1016;color:white;font-family:Helvetica, Arial, sans-serif;  height: 50px;">Ehtiyyat hissələri və aksesuarlar</a>
+                <button type="submit" class="btn btn-success btn-sm font-weight-bold pt-3" style="height:50px;font-family:Helvetica, Arial, sans-serif; background-color:#7ed321; color:white; ">Elan yerləşdir</button>
+            </div>
+        </div>
+        <br />
+        <p class=" font-weight-bold" style="padding-left:100px;">
+            ELAN YERLƏŞDİRMƏK
+        </p>
+        <hr class="mx-5" />
+        <div style="text-align:center;" class="px-xl-5">
+            <div style="margin-left:250px;margin-right:250px; height:80px; background-color:aliceblue;  ">
+                <p class=" text-justify; align-text-bottom; pt-4" style="color:forestgreen"><b>Siz (050) 317-14-12 nömrəsindən elan yerləşdirirsiniz</b></p>
+            </div>
+        </div>
+        <br />
+        <div>
+            <h5 class="font-weight-bold " style="padding-left:100px;">
+                ELAN
+            </h5>
+            <br />
+            <ul style="padding-left:100px;">
+                <li>Üç ay ərzində bir nəqliyyat vasitəsi yalnız bir dəfə pulsuz dərc oluna bilər.</li>
+                <li>Üç ay ərzində təkrar və ya oxşar elanlar (marka/model, rəng) ödənişlidir.</li>
+                <li>Elanınızı saytın ön sıralarında görmək üçün "İrəli çək" xidmətindən istifadə edin.</li>
+            </ul>
+        </div>
+
+
+
+        @*Elan hissesi*@
+
+        <div style="padding-left:100px;">
+            <div class="form-group row">
+
+                <label for="marka" style="padding-right:20px;" class="pr-4 px-3 mt-1">Marka</label>
+                <select class="w-25" style=" padding-left:50px;margin-left:50px;margin-right:150px; padding-right:25px;"
+                        asp-for="@Model.TB_ADS.Brand_ID"
+                        asp-items="@(new SelectList(Model.CAR_BRANDS, "ID", "BRAND_NAME"))">
+                    <option>Seçin</option>
+                </select>
+
+                <label for="fuel_type" style="padding-left:40px; padding-right:20px;" class="mt-1">Yanacaq növü</label>
+                <select class=" w-25" style="padding-left:50px;margin-left:50px; padding-right:25px;"
+                        asp-for="@Model.TB_ADS.Fuel_Type_ID"
+                        asp-items="@(new SelectList(Model.FUEL_TYPE, "ID", "NAME"))">
+                    <option></option>
+                </select>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="model" style="padding-right:20px;" class="mt-1 px-3 pr-4">Model</label>
+                <select class="w-25" style="padding-left:50px;margin-left:50px;margin-right:150px; padding-right:25px;"
+                        asp-for="@Model.TB_ADS.Model_ID"
+                        asp-items="@(new SelectList(Model.CAR_MODEL, "ID", "MODEL_NAME"))">
+                    <option>Seçin</option>
+                </select>
+                <label for="transmission" style="padding-left:40px; " class="mt-1">Ötürücü</label>
+                <select class=" w-25" style="padding-left:50px;margin-left:108px; padding-right:25px;"
+                        asp-for="@Model.TB_ADS.Transmission_ID"
+                        asp-items="@(new SelectList(Model.TRANSMISSION, "ID", "NAME"))">
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label for="ban_type" style="padding-right:20px;" class="mt-1 px-3 pr-4">Ban növü</label>
+                <select class="w-25" style="padding-left:50px;margin-left:30px;margin-right:150px; padding-right:25px;"
+                        asp-for="@Model.TB_ADS.Body_Type_ID"
+                        asp-items="@(new SelectList(Model.BAN_TYPE, "ID", "NAME"))">
+                    <option></option>
+                </select>
+                <label for="gearbox" style="padding-left:40px; " class="mt-1">Sürətlər qutusu</label>
+                <select class=" w-25" style="padding-left:50px;margin-left:58px; padding-right:25px;"
+                        asp-for="@Model.TB_ADS.Gearbox_ID"
+                        asp-items="@(new SelectList(Model.GEARBOX, "ID", "NAME"))">
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label for="march" style="padding-right:20px;" class="mt-1 px-3 pr-4">Yürüş, km </label>
+                <input type="number" class="w-25" style="padding-left:50px;margin-left:28px;margin-right:150px; padding-right:25px;"
+                       asp-for="@Model.TB_ADS.Walk">
+
+                <label for="year" style="padding-left:40px; " class="mt-1">Buraxılış ili </label>
+                <input type="number" class=" w-25" style="padding-left:50px;margin-left:92px; padding-right:25px;"
+                       asp-for="@Model.TB_ADS.Year">
+
+            </div>
+
+            <div class="form-group row">
+                <label for="color" style="padding-right:20px;" class="mt-1 px-3 pr-4">Rəng</label>
+                <select class="w-25" style="padding-left:50px;margin-left:62px;margin-right:150px; padding-right:25px;"
+                        asp-for="@Model.TB_ADS.Color_ID"
+                        asp-items="@(new SelectList(Model.COLOR, "ID", "NAME"))">
+                    <option></option>
+                </select>
+                <label for="engine_power" style="padding-left:40px; " class="mt-1">Mühərrikin həcmi </label>
+                <input type="number" class=" w-25" style="padding-left:50px;margin-left:40px; padding-right:25px;"
+                       asp-for="@Model.TB_ADS.Engine_Capacity_ID">
+            </div>
+
+            <div class="form-group row">
+                <label for="price" style="padding-right:20px;" class="mt-1 px-3 pr-4">Qiymət </label>
+                <input type="number" style="width:150px; margin-left:48px;margin-right:10px; "
+                       asp-for="@Model.TB_ADS.Price">
+
+                <label class="radio-inline" style="margin-right:15px;">
+                    <input type="radio" class="mt-2" value="3"
+                           asp-for="@Model.TB_ADS.Currency_ID">AZN
+                </label>
+                <label class="radio-inline" style="margin-right:15px;">
+                    <input type="radio" class="mt-2" value="8"
+                           asp-for="@Model.TB_ADS.Currency_ID">USD
+                </label>
+                <label class="radio-inline" style="margin-right: 150px;">
+                    <input type="radio" class="mt-2" value="9"
+                           asp-for="@Model.TB_ADS.Currency_ID">EUR
+                </label>
+                <label for="engine_capacity" style="padding-left:40px; " class="mt-1">Mühərrikin gücü, a.g. </label>
+                <input type="number" class=" w-25" style="padding-left:50px;margin-left:16px; padding-right:25px;"
+                       asp-for="@Model.TB_ADS.Engine_Power">
+
+            </div>
+
+            <div class="form-check " style="margin-left:124px;">
+                <input class="form-check-input" type="checkbox"
+                       asp-for="@Model.TB_ADS.Credit">
+                <label class="form-check-label" for="credit">
+                    Kreditdədir
+                </label>
+            </div>
+
+            <div class="form-check" style="margin-left:124px;">
+                <input class="form-check-input" type="checkbox"
+                       asp-for="@Model.TB_ADS.Barter">
+                <label class="form-check-label" for="barter">
+                    Barter mümkündür
+                </label>
+            </div>
+            <br />
+            <div class="form-group row">
+                <label for="message" style="padding-right:20px;" class="mt-1 px-3">Əlavə məlumat</label>
+                <textarea rows="5" class="form-control0" style="height:130px; width:1000px;"
+                          asp-for="@Model.TB_ADS.NOTE"></textarea>
+                <small class="form-text text-muted" style="margin-left:140px;">telefon nömrələri qeyd etmək qadağandır</small>
+            </div>
+        </div>
+
+        @*Avtomobil techizati hissesi*@
+
+        <br />
+        <div style="padding-left:100px;">
+            <h5 class="font-weight-bold">
+                Avtomobilin təchizatı
+            </h5>
+            <br />
+            <div class="form-group row pl-3">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.ALLOY_WHEELS">
+                    <label class="form-check-label" for="disk" style="margin-right:180px;">Yüngül lehimli disklər</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.ABS">
+                    <label class="form-check-label" for="abs" style="margin-right:180px;">ABS</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.LUKE">
+                    <label class="form-check-label" for="lyuk" style="margin-right:180px;">Lyuk</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.RAIN_SENSOR">
+                    <label class="form-check-label" for="rain">Yağış sensoru</label>
+                </div>
+            </div>
+
+            <div class="form-group row pl-3">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="center"
+                           asp-for="@Model.TB_ADS.CENTRAL_CLOSURE">
+                    <label class="form-check-label" for="center" style="margin-right:204px;">Mərkəzi qapanma</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.PARKING_RADAR">
+                    <label class="form-check-label" for="park_radar" style="margin-right:134px;">Park radarı</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.CONDITIONERS">
+                    <label class="form-check-label" for="conditioner" style="margin-right:126px;">Kondisioner</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.SEAT_HEATING">
+                    <label class="form-check-label" for="sit_hot">Oturacaqların isidilməsi</label>
+                </div>
+            </div>
+
+            <div class="form-group row pl-3">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.LEATHER_SALON">
+                    <label class="form-check-label" for="salon" style="margin-right:258px;">Dəri salon</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.XENON_LAMPS">
+                    <label class="form-check-label" for="lamp" style="margin-right:92px;">Ksenon lampalar</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.REAR_VIEW_CAMERA">
+                    <label class="form-check-label" for="back_view" style="margin-right:52px;">Arxa görüntü kamerası</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.SIDE_CURTAINS">
+                    <label class="form-check-label" for="perde">Yan pərdələr</label>
+                </div>
+            </div>
+
+
+            <div class="form-group row pl-3">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           asp-for="@Model.TB_ADS.SEAT_VENTILATION">
+                    <label class="form-check-label" for="salon" style="margin-right:258px;">Oturacaqların ventilyasiyası</label>
+                </div>
+            </div>
+
+        </div>
+
+        @*Sekil hissesi*@
+
+        <br />
+        <div style="padding-left:100px;">
+            <h5 class="font-weight-bold">
+                Şəkillər
+            </h5>
+            <br />
+            <div class="px-5 mb-2">
+                <img src="~/images/Screenshot 2020-10-06 155820.png" style="margin-right:170px; margin-left:70px;" />
+                <img src="~/images/Screenshot 2020-10-06 155939.png" style="margin-right:160px;" />
+                <img src="~/images/Screenshot 2020-10-06 160004.png" style="margin-right:130px;" />
+                <img src="~/images/Screenshot 2020-10-06 160018.png" />
+            </div>
+
+            <div class="btn-group btn-block  px-lg-5 ">
+                <button class="btn btn-primary btn-sm font-weight-bold rounded" style="margin-right:20px;"
+                       >
+                    Ön görünüşü
+                </button>
+                <input type="hidden"  asp-for="@Model.TB_ADS.TB_ADS_IMAGE" />
+                <img src="~/image/@Model.TB_ADS_IMAGE" width="80" />
+                <input type="file" />
+                <button class="btn btn-primary btn-sm font-weight-bold rounded" style="margin-right:20px;">Arxa görünüşü</button>
+                <button class="btn btn-primary btn-sm font-weight-bold rounded" style="margin-right:20px;">Ön paneli</button>
+                <button name="file" class="btn btn-primary btn-sm font-weight-bold rounded">
+                    Əlavə
+                </button>
+            </div>
+            <br />
+            <br />
+            <ul class="px-3 text-muted">
+                <li>Şəkillər Azərbaycan Respublikasının ərazisində çəkilməlidir.</li>
+                <li>Şəkillər yaxşı keyfiyyətdə olmalıdır. Nəqliyyat vasitəsi yaxşı işıqlandırılmış olmalı, şəkillərin üzərində loqotip və digər yazılar olmamalıdır. Skrinşotlar qəbul olunmur.</li>
+                <li>Avtosalonda çəkilmiş şəkillər qeydiyyatdan keçmiş avtosalonun hesabından уerləşdirilməlidir.</li>
+                <li>Şəxsi sahibi tərəfindən satılan nəqliyyat vasitəsinin şəkli avtosalon/rəsmi servis ərazisində və ya yaxınlığında çəkilməməlidir.</li>
+            </ul>
+        </div>
+
+
+        @*Elaqe hisssei*@
+
+        <br />
+        <div style="padding-left:100px;">
+            <h5 class="font-weight-bold">
+                Əlaqə
+            </h5>
+            <p>
+                <small class="text-muted">Elan dərc olunduqdan sonra əlaqə məlumatları ilə bağlı heç bir dəyişiklik həyata keçirilmir.</small>
+            </p>
+
+            <div class="form-group row w-25">
+                <label for="name" class="col-sm-2 col-form-label w-25">Adınız</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           asp-for="@Model.TB_ADS.NAME">
+                </div>
+            </div>
+
+            <div class="form-group row ">
+                <label for="city" style="margin-right:12px;" class="pl-3 mt-1">Şəhər</label>
+                <select class="rounded  " style="width:230px; height:38px; border-color:lightgrey"
+                        asp-for="@Model.TB_ADS.CITY_ID"
+                        asp-items="@(new SelectList(Model.CITY, "ID", "NAME"))">
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="form-group row w-25">
+                <label for="email" class="col-sm-2 col-form-label w-25">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control"
+                           asp-for="@Model.TB_ADS.EMAIL">
+                    <small class="form-text text-muted">saytda göstərilmir</small>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</body>
+</html>

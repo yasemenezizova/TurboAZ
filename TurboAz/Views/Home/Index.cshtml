@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Turbo.az</title>
+    <link href="~/lib/bootstrap/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/twitter-bootstrap/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/twitter-bootstrap/css/bootstrap-reboot.css" rel="stylesheet" />
+
+</head>
+<body class="w-75; mx-auto; mb-4 " style="border-color: transparent">
+
+    @await Html.PartialAsync("_navbar")
+    <div style="background-color: #ca1016; border-color:transparent; border-right-style:hidden">
+        <div class="btn-group btn-block  px-lg-5  ">
+            <a href="#" class="btn  btn-sm font-weight-bold pt-3" style="font-size: 15px; background-color: #ca1016; color: white; font-family: Helvetica, Arial, sans-serif; height: 50px;">Bütün elanlar</a>
+            <a href="#" class="btn  btn-sm font-weight-bold pt-3" style="font-size: 15px; background-color: #ca1016; color: white; font-family: Helvetica, Arial, sans-serif; height: 50px;">Avtosalonlar</a>
+            <a href="#" class="btn  btn-sm font-weight-bold pt-3" style="font-size: 15px; background-color: #ca1016; color: white; font-family: Helvetica, Arial, sans-serif; height: 50px;">Mağazalar və şirkətlər</a>
+            <a href="#" class="btn  btn-sm font-weight-bold pt-3" style="font-size: 15px; background-color: #ca1016; color: white; font-family: Helvetica, Arial, sans-serif; height: 50px;">Ehtiyyat hissələri və aksesuarlar</a>
+            <a href="/Home/New" class="btn btn-success btn-sm font-weight-bold pt-3" style="font-size: 15px; height: 50px; font-family: Helvetica, Arial, sans-serif; background-color: #7ed321; color: white; ">Elan yerləşdir</a>
+        </div>
+    </div>
+    <div class="border shadow" style="border-color:#d8d8d8; background-color:#d8d8d8;">
+        <div class="px-5 ">
+            <div class="form-group row mt-5 font-weight-bold">
+
+                <select style="color:#828282; border-color:grey; margin-left:40px; margin-right:30px; padding-right:45px;padding-left:15px; height:40px;" class="rounded border font-weight-bold"
+                        asp-for="@Model.TB_ADS.Brand_ID"
+                        asp-items="@(new SelectList(Model.CAR_BRANDS, "ID", "BRAND_NAME"))">
+                    <option>Bütün markalar</option>
+                </select>
+                <label for=" price" style="border-color: grey;color:#828282; background-color:white; width: 100px; height: 40px; padding-right: 20px; " class="rounded-left border  px-3 pt-2">
+                    Qiymət
+                </label>
+                <select name="price" id="price" class="border font-weight-bold" style="color: #828282; border-color: grey; padding-left: 13px; width: 100px; padding-right: 25px; height: 40px; "
+                        asp-for="@Model.TB_ADS.Currency_ID"
+                        asp-items="@(new SelectList(Model.Currency, "ID", "NAME"))">
+                    
+                </select>
+                <input placeholder="min." class="font-weight-bold border " type="number" name="min" id="min" style="border-color: grey; width: 100px; padding-left: 20px; height: 40px; ">
+                <input placeholder="max." class="font-weight-bold rounded-right border " type="number" name="max" id="max" style="border-color: grey; width: 100px; padding-left: 20px; height: 40px; ">
+                <div class="rounded border" style=" background-color: white; border-color: grey; color: #828282; width: 100px; height: 40px; padding-right: 10px; margin-left: 30px; ">
+                    <label for="credit" class=" pl-3 pt-2" style=" color: #828282;">Kredit</label>
+                    <input class="form-check-input " type="checkbox" id="credit" style="color: #828282; margin-left: 8px; padding: 7px; margin-top: 14px;">
+                </div>
+                <select style="color: #828282; border-color: grey; margin-left: 30px; margin-right: 30px; padding-right: 40px; padding-left: 20px; height: 40px;" class="font-weight-bold rounded border"
+                        asp-for="@Model.TB_ADS.CITY_ID"
+                        asp-items="@(new SelectList(Model.CITY, "ID", "NAME"))">
+                    <option value="1">Bütün şəhərlər</option>
+
+                </select>
+                <button class="btn " style="color: #828282; margin-left: 20px; margin-right: 30px; padding-right: 70px; padding-left: 70px; height: 40px; color: white; background-color: #ca1016; font-family: Helvetica, Arial, sans-serif; ">
+                    <b>Axtar</b>
+                </button>
+            </div>
+            <div class="form-group row mt-3 font-weight-bold">
+
+                <select style="color:#828282; border-color:grey; margin-left:40px; width:200px; margin-right:30px;padding-left:15px; height:40px"; class="rounded border font-weight-bold"
+                         asp-for="@Model.TB_ADS.Model_ID"
+                        asp-items="@(new SelectList(Model.CAR_MODEL, "ID", "MODEL_NAME"))">>
+                    <option>Bütün modellər</option>
+                </select>
+                <label for="year" style=" background-color: white; border-color: grey; color: #828282; width: 150px; height: 40px; padding-right: 20px; padding-left: 50px; " class="rounded-left border  px-3 pt-2">Buraxılış ili</label>
+
+                <input placeholder="min." class="font-weight-bold border " type="number" name="min" id="min" style="border-color: grey; width: 125px; padding-left: 40px; height: 40px; ">
+                <input placeholder="max." class="font-weight-bold rounded-right border " type="number" name="max" id="max" style="border-color: grey; width: 125px; padding-left: 40px; height: 40px; ">
+                <div class="rounded border" style=" background-color: white; border-color: grey; color: #828282; width: 100px; height: 40px; padding-right: 10px; margin-left: 30px; margin-right:30px;">
+                    <label for="barter" class=" pl-3 pt-2" style="  color: #828282;">Barter</label>
+                    <input class="form-check-input " type="checkbox" id="credit" style="color: #828282; margin-left: 8px; padding: 7px; margin-top: 14px;">
+                </div>
+                <label for="abs" style="border-color: grey;color:#828282;margin-right: 30px; background-color:white;  padding-right: 30px; padding-left: 20px; height: 40px; " class="rounded border pt-2 ">Yeni elan sayı:2000</label>
+                <button class="btn " style="color: #828282; margin-left: 20px; margin-right: 30px; padding-right: 39px; padding-left: 39px; height: 40px; color: white; background-color: #797979; font-family: Helvetica, Arial, sans-serif; ">
+                    <b>Ətraflı axtarış</b>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

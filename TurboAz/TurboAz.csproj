@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\bootstrap\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\image\0x0.jpg" />
+    <None Include="wwwroot\image\2020-lexus-lc-mmp-1-1570467943.jpg" />
+    <None Include="wwwroot\image\347030.jpg" />
+    <None Include="wwwroot\image\960x0.jpg" />
+    <None Include="wwwroot\image\bugatti-veyron-pics-1.jpg" />
+    <None Include="wwwroot\image\DSC08326.JPG" />
+    <None Include="wwwroot\image\elva-mclarens-latest-sports-car.jpg" />
+    <None Include="wwwroot\image\Lam1_trans_NvBQzQNjv4BqnAdySV0BR-4fDN_-_p756cVfcy8zLGPV4EhRkjQy7tg.webp" />
+    <None Include="wwwroot\image\Lexus-LCC-homepage-content-tile_LEX-LCC-MY21-0093-01_750x460_M75.jpg" />
+    <None Include="wwwroot\image\mclaren-elva-artisan.jpg" />
+    <None Include="wwwroot\image\pexels-photo-3802510.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
